@@ -1,17 +1,5 @@
 const { User, Thought} = require('../models');
 
-/* 
-To Build out
-const {
-    getUsers,//DONE
-    getSingleUser, //Done
-    createUser, //Done
-    updateUser, //Done
-    deleteUser,//Done
-    createFriend,
-    deleteFriend
-    */
-
 module.exports = {
     getUsers(req,res){
         User.find()
