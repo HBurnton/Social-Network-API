@@ -6,8 +6,8 @@ const {
     getUsers,//DONE
     getSingleUser, //Done
     createUser, //Done
-    updateUser,
-    deleteUser,
+    updateUser, //Done
+    deleteUser,//Done
     createFriend,
     deleteFriend
     */
@@ -36,5 +36,34 @@ module.exports = {
         .then(((user)=> res.status(200).json(user)))
         .catch((err)=> res.status(500).json(err))
     },
+
+    updateUser(req, res) {
+        User.findOneAndUpdate(
+          { _id: req.params.userId },
+          { $set: req.body },
+          { runValidators: true, new: true }
+        )
+          .then((user) =>
+            !user
+              ? res.status(404).json({ message: 'No user found' })
+              : res.status(200).json(user)
+          )
+          .catch((err) => {
+            console.log(err);
+            res.status(500).json(err);
+          });
+      },
+
+    deleteUser(req,res){
+        User.findOneAndDelete({ _id: req.params.userId })
+        .then((user) =>
+          !user
+            ? res.status(404).json({ message: 'No user was found' })
+            : Thought.deleteMany({ _id: { $in: user.thoughts } })
+        )
+        .then(() => res.json({ message: 'User and associated thoughts have been deleted!' }))
+        .catch((err) => res.status(500).json(err));
+    },
+
 
 }
