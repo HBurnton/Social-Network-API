@@ -4,6 +4,7 @@ module.exports ={
 
     getThoughts(req,res){
         Thought.find()
+        .select('-__v')
         .then((thought) => res.status(200).json(thought))
         .catch((err) => res.status(500).json(err))
     },
