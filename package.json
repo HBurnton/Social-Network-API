@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/HBurnton/Social-Network-API#readme",
   "dependencies": {
+    "express": "^4.18.2",
     "mongoose": "^6.8.0"
   }
 }
